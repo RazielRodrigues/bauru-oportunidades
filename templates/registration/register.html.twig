@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    {# <h3 class="text-center">Are you ready to transform your voice in text ?</h3> #}
+
+	<section class="fdb-block">
+
+		<div class="container">
+
+        	<div class="row justify-content-center">
+
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                    <button type="submit" class="btn btn-info form-control">Register</button>
+                    {{ form_row(registrationForm.agreeTerms) }}
+                {{ form_end(registrationForm) }}
+
+			</div>
+
+		</div>
+	</section>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+	<section class="fdb-block">
+		<div class="container">
+        
+            {% if error %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        
+        	<div class="row justify-content-center">
+                <form action="{{ path('app_login') }}" method="post">
+
+                    <div class="form-group">
+                        <label for="username">Email</label>
+                        <input name="_username" value="{{ last_username }}" type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="_password">
+                    </div>
+
+                    <input type="hidden" name="_target_path" value="/home"/> 
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <button type="submit" class="btn btn-success col-12">Login</button>
+                </form>
+			</div>
+
+		</div>
+	</section>
+
+{% endblock %}

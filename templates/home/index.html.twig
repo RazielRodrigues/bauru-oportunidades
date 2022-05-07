@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+	<section id="features" class="fdb-block mb-5">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-12 col-md-12 ml-md-auto">
+
+					{# <div class="shadow-lg p-3 mb-5 bg-dark rounded text-center" id="snackbar">
+						<h2 class="neonText">Listening your voice</h2>
+					</div> #}
+
+					<form id="save-record" method="post">
+						<div class="form-group">
+							<textarea name="result-speech" class="form-control" id="result" rows="10" placeholder="Jot something down..."></textarea>
+						</div>
+						<button id="save-record-button" type="submit" class="btn btn-success col-12  mb-2">Save</button>
+					</form>
+
+					{# <button id="new-record" class="btn btn-primary col-12 mb-2">
+						Start
+					</button>
+					<button id="stop-record" class="btn btn-secondary col-12 mb-2">
+						Stop
+					</button> #}
+				</div>
+
+				<div class="m-5"></div>
+
+				<div class="col-12 col-md-12 ml-md-auto">
+
+					<h4>Records</h4>
+
+					{% if records|length > 0 %}
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Name</th>
+									<th scope="col">Record</th>
+									<th scope="col">Download</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for record in records %}
+									<tr>
+										<th scope="row">{{record.id}}</th>
+										<td>{{record.name}}</td>
+										<td>{{ record.record|length > 10 ? record.record|slice(0, 10) ~ '...' : record.record  }}</td>
+										<td>
+											<a href="javascript:alert('under contruction')" class="badge badge-primary">Download</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					{% else %}
+						<p>Sorry dude, but you don't any record yet</p>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="fdb-block"></section>
+
+	<script src="{{ absolute_url(asset('assets/js/speech.js')) }}"></script>
+
+{% endblock %}

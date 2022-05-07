@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}About us{% endblock %}
+
+{% block body %}
+
+	{# <section class="fdb-block">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col col-md-8 text-center">
+					<h1>When Symfony Register for you</h1>
+				</div>
+			</div>
+		</div>
+	</section> #}
+
+	{# <div class="col col-md-12 text-center">
+		<h1>Speech to write</h1>
+	</div> #}
+
+	<section id="features" class="fdb-block">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-12 col-md-6 col-lg-5">
+					<p class="lead">A small symfony register app with:</p>
+					<p class="lead">- C.R.U.D</p>
+                    <p class="lead">- EasyAdmin</p>
+                    <p class="lead">- Deployed inside heroku</p>
+                    <p class="lead">- <a class="btn btn-primary" href="https://github.com/RazielMiranda/symfony-register">See my codes...</a></p>
+				</div>
+				<div class="col-12 col-md-6 ml-md-auto">
+                    <img src="{{ absolute_url(asset('assets/images/old-man.jpg')) }}" alt="Old Man Image"/>
+				</div>
+			</div>
+		</div>
+	</section>
+{# 
+	<section class="fdb-block fdb-viewport">
+		<div class="container justify-content-center align-items-center d-flex">
+			<div class="row justify-content-center text-center">
+				<div class="col-12 col-md-8">
+					<img alt="image" class="fdb-icon" src="{{ absolute_url(asset('assets/images/logo.jpg')) }}">
+					<h1>Take a test drive</h1>
+					<p>We only need access to your microphone!</p>
+                    <button class="btn btn-lg btn-outline-primary">Start my test</button>
+				</div>
+			</div>
+		</div>
+	</section> #}
+
+{% endblock %}

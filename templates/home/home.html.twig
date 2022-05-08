@@ -28,9 +28,9 @@
 					<thead>
 						<tr>
 							<th scope="col">Nome</th>
-							<th scope="col">Tipo</th>
+							{# <th scope="col">Tipo</th> #}
 							<th scope="col">Cidade</th>
-							<th scope="col">Criado em</th>
+							{# <th scope="col">Criado em</th> #}
 							<th scope="col">Ações</th>
 						</tr>
 					</thead>
@@ -38,10 +38,9 @@
 						{% for job in jobs %}
 							<tr>
 								<td>{{job.name}}</td>
-								<td>{{job.jobtype}}</td>
+								{# <td>{{job.jobtype}}</td> #}
 								<td>{{job.city}}</td>
-								<td>{{job.createdat|date("d-m-Y")}}</td>
-
+								{# <td>{{job.createdat|date("d-m-Y")}}</td> #}
 								<td>
 									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#jobModal{{job.id}}">Ver Mais</button>
 									<div class="modal fade" id="jobModal{{job.id}}" tabindex="-1" aria-labelledby="jobModalLabel{{job.id}}" aria-hidden="true">

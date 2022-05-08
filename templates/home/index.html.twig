@@ -65,9 +65,9 @@
 					<thead>
 						<tr>
 							<th scope="col">Nome</th>
-							<th scope="col">Tipo</th>
+							{# <th scope="col">Tipo</th> #}
 							<th scope="col">Cidade</th>
-							<th scope="col">Criado em</th>
+							{# <th scope="col">Criado em</th> #}
 							<th scope="col">Ações</th>
 						</tr>
 					</thead>
@@ -75,9 +75,9 @@
 						{% for job in jobs %}
 							<tr>
 								<td>{{job.name}}</td>
-								<td>{{job.jobtype}}</td>
+								{# <td>{{job.jobtype}}</td> #}
 								<td>{{job.city}}</td>
-								<td>{{job.createdat|date('d-m-Y')}}</td>
+								{# <td>{{job.createdat|date('d-m-Y')}}</td> #}
 								<td>
 									{# <a href="{{path('job_edit', {'id': job.id})}}" class="btn btn-primary">Editar</a> #}
 									{# <a href="{{path('job_delete', {'id': job.id})}}" class="btn btn-danger">Excluir</a> #}
@@ -104,7 +104,7 @@
 												<p id="job-type">Tipo: {{job.jobtype}}</p>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar para a lista de vagas</button>
+												<button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Voltar para a lista de vagas</button>
 											</div>
 											</div>
 										</div>

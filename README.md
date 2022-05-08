@@ -15,3 +15,8 @@
     - php
     - mysql
     - docker (in the future)
+    
+# PROJECT ENVIRONMENTS
+    - PROD: https://bauruoportunidades.herokuapp.com/
+    - STAGING:
+    - EDGE

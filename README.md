@@ -6,3 +6,12 @@
         "php bin/console doctrine:database:create --if-not-exists",
         "php bin/console doctrine:migrations:migrate "
     ]
+
+# START PROJECT
+
+    use the run shell
+
+# DEPENDENCIES
+    - php
+    - mysql
+    - docker (in the future)

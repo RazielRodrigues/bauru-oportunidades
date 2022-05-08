@@ -20,3 +20,6 @@
     - PROD: https://bauruoportunidades.herokuapp.com/
     - STAGING:
     - EDGE
+
+# BOARD
+    - https://trello.com/b/rnAjPmU2/bauru-oportunidades-2

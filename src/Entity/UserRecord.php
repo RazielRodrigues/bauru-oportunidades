@@ -33,6 +33,21 @@ class UserRecord
      */
     private $fk_user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $job_type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +85,42 @@ class UserRecord
     public function setFkUser(?User $fk_user): self
     {
         $this->fk_user = $fk_user;
+
+        return $this;
+    }
+
+    public function getJobType(): ?string
+    {
+        return $this->job_type;
+    }
+
+    public function setJobType(string $job_type): self
+    {
+        $this->job_type = $job_type;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTime $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }

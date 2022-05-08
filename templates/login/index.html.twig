@@ -15,7 +15,9 @@
                     </button>
                 </div>
             {% endif %}
-        
+
+            <h3 class="text-center">Para cadastrar uma vaga é necessário fazer login</h3>
+
         	<div class="row justify-content-center">
                 <form action="{{ path('app_login') }}" method="post">
 
@@ -25,14 +27,17 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Senha</label>
                         <input type="password" class="form-control" id="password" placeholder="Password" name="_password">
                     </div>
 
                     <input type="hidden" name="_target_path" value="/home"/> 
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                    <button type="submit" class="btn btn-success col-12">Login</button>
+                    <button type="submit" class="btn btn-outline-primary col-12">Login</button>
+                    <a class="btn btn-outline-primary col-12 mt-2" href="{{path('app_register')}}">
+					    Criar uma conta
+				    </a>
                 </form>
 			</div>
 

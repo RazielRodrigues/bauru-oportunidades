@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\UserRecord;
 use App\Repository\UserRecordRepository;
-use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +12,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+    
     /**
      * @Route("/", name="app_index")
      */
-    public function index(): Response
+    public function index(UserRecordRepository $userRecordRepository ): Response
     {
-        return $this->render('home/home.html.twig');
+        $jobs = $userRecordRepository->findAll();
+        return $this->render('home/home.html.twig', ['jobs' => $jobs]);
+    }
+
+    /**
+     * @Route("/about", name="app_about")
+     */
+    public function about(): Response
+    {
+        return $this->render('home/about.html.twig');
     }
 
     /**
@@ -28,11 +37,14 @@ class HomeController extends AbstractController
     {
         $requestBody = $request->request->all();
 
-        if (empty($requestBody['result-speech'])) return $this->json(['message' => 'Please provide some text'], 500);
+        if (empty($requestBody)) return $this->json(['message' => 'Please all information'], 500);
 
         $userRecord = new UserRecord();
-        $userRecord->setName('record-' . (new \DateTime('now'))->format('Y-m-d H:i:s'));
-        $userRecord->setRecord($requestBody['result-speech']);
+        $userRecord->setName($requestBody['job-name']);
+        $userRecord->setRecord($requestBody['job-description']);
+        $userRecord->setJobType($requestBody['job-type']);
+        $userRecord->setCity($requestBody['job-city']);
+        $userRecord->setCreatedAt(new \DateTime('now'));
 
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
@@ -53,9 +65,8 @@ class HomeController extends AbstractController
         
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
-
         return $this->render('home/index.html.twig', [
-            'records' => $user->getUserRecords()->getValues(),
+            'jobs' => $user->getUserRecords()->getValues(),
         ]);
     }
 

@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: trabalhos_em_bauru
+
+  php:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html

@@ -18,9 +18,6 @@ COPY . /var/www
 WORKDIR /var/www
  
 # RUN chmod +x /entrypoint.sh
-
-RUN chmod +x /run.sh
-RUN ./run.sh
  
 CMD ["apache2-foreground"]
  

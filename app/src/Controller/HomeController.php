@@ -111,24 +111,26 @@ class HomeController extends AbstractController
 
         $response = $this->client->request(
             'GET',
-            'http://localhost:3000/'
+            'https://node-web-scrapper-production.up.railway.app/'
         );
-        $requestBody = $response->toArray();
+        $requestBody = $response->toArray()[0];
 
         /** @var \App\Entity\User $user */
         $user = $this->getDoctrine()->getManager()->getRepository(User::class)->find(2);
 
-        foreach ($requestBody as $data) {
+        foreach ($requestBody as $body) {
+            foreach ($body as $data) {
 
-            $userRecord = new UserRecord();
-            $userRecord->setName($data['title']);
-            $userRecord->setRecord($data['description']);
-            $userRecord->setJobType($data['type']);
-            $userRecord->setCity($data['city']);
-            $userRecord->setCreatedAt(new \DateTime('now'));
-            $user->addUserRecord($userRecord);
-            $this->getDoctrine()->getManager()->persist($userRecord);
+                $userRecord = new UserRecord();
+                $userRecord->setName($data['title']);
+                $userRecord->setRecord($data['description']);
+                $userRecord->setJobType($data['type']);
+                $userRecord->setCity($data['city']);
+                $userRecord->setCreatedAt(new \DateTime('now'));
+                $user->addUserRecord($userRecord);
+                $this->getDoctrine()->getManager()->persist($userRecord);
 
+            }
         }
 
         $this->getDoctrine()->getManager()->flush();

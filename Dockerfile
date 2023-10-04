@@ -28,41 +28,12 @@ VOLUME ./app:/var/www/symfony_docker
 
 # Base image for Nginx
 FROM nginx:stable-alpine AS nginx_service
-EXPOSE 80
-VOLUME ./app:/var/www/symfony_docker
-VOLUME ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+# Remove the default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
 
 # Add custom Nginx configuration
-RUN echo "\
-server {\n\
-    listen 80;\n\
-    index index.php;\n\
-    server_name localhost;\n\
-    root /var/www/symfony_docker/public;\n\
-    error_log /var/log/nginx/project_error.log;\n\
-    access_log /var/log/nginx/project_access.log;\n\
-\n\
-    location / {\n\
-        try_files \$uri /index.php\$is_args\$args;\n\
-    }\n\
-\n\
-    location ~ ^/index\\.php(/|\$) {\n\
-        fastcgi_pass php:9000;\n\
-        fastcgi_split_path_info ^(.+\\.php)(/.*)\$;\n\
-        include fastcgi_params;\n\
-\n\
-        fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;\n\
-        fastcgi_param DOCUMENT_ROOT \$realpath_root;\n\
-\n\
-        fastcgi_buffer_size 128k;\n\
-        fastcgi_buffers 4 256k;\n\
-        fastcgi_busy_buffers_size 256k;\n\
-\n\
-        internal;\n\
-    }\n\
-\n\
-    location ~ \\.php\$ {\n\
-        return 404;\n\
-    }\n\
-}\n\
-" > /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf /etc/nginx/conf.d/
+
+EXPOSE 80
+VOLUME ./app:/var/www/symfony_docker

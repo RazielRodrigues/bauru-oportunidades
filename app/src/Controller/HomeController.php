@@ -111,7 +111,7 @@ class HomeController extends AbstractController
 
         $response = $this->client->request(
             'GET',
-            'https://node-web-scrapper-production.up.railway.app/'
+            'https://scrapper-88ry.onrender.com'
         );
         $requestBody = $response->toArray()[0];
 
@@ -129,13 +129,11 @@ class HomeController extends AbstractController
                 $userRecord->setCreatedAt(new \DateTime('now'));
                 $user->addUserRecord($userRecord);
                 $this->getDoctrine()->getManager()->persist($userRecord);
-
             }
         }
 
         $this->getDoctrine()->getManager()->flush();
 
         return $this->json(['message' => 'saved ' . count($requestBody)], 200);
-
     }
 }

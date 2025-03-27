@@ -44,6 +44,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $userRecords;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
     public function __construct()
     {
         $this->userRecords = new ArrayCollection();
@@ -164,6 +169,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $userRecord->setFkUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isVerified
+     */ 
+    public function getIsVerified()
+    {
+        return $this->isVerified;
+    }
+
+    /**
+     * Set the value of isVerified
+     *
+     * @return  self
+     */ 
+    public function setIsVerified($isVerified)
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

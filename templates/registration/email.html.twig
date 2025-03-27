@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifique seu Email - BauruJobs</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content p {
+            margin: 0 0 15px;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .link {
+            word-break: break-all;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+            padding: 15px;
+            border-top: 1px solid #dddddd;
+        }
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 100% !important;
+                margin: 10px auto;
+            }
+            .content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Bem-vindo ao BauruJobs!</h2>
+        </div>
+        <div class="content">
+            <p>Olá,</p>
+            <p>Obrigado por se registrar no BauruJobs! Estamos muito felizes em tê-lo conosco.</p>
+            <p>Para completar seu cadastro e começar a explorar as melhores oportunidades de emprego em Bauru, por favor, verifique seu endereço de email clicando no botão abaixo:</p>
+            <p style="text-align: center;">
+                <a href="{{ signedUrl }}" class="button">Verificar Meu Email</a>
+            </p>
+            <p>Se o botão acima não funcionar, você pode copiar e colar o link abaixo no seu navegador:</p>
+            <p><a href="{{ signedUrl }}" class="link">{{ signedUrl }}</a></p>
+            <p>Este link é válido por 24 horas. Caso ele expire, você pode solicitar um novo link de verificação na página de login.</p>
+            <p>Se você não criou uma conta no BauruJobs, por favor, ignore este email.</p>
+            <p>Atenciosamente,<br>Equipe BauruJobs</p>
+        </div>
+        <div class="footer">
+            <p>BauruJobs - O seu portal de empregos em Bauru<br>
+            <a href="mailto:contato@baurujobs.com.br">contato@baurujobs.com.br</a> | <a href="https://www.baurujobs.com.br">www.baurujobs.com.br</a></p>
+        </div>
+    </div>
+</body>
+</html>

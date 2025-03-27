@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Vagas de Emprego - Bauru Jobs
+  Vagas de Emprego - Bauru Oportunidades
 {% endblock %}
 
 {% block body %}
@@ -12,7 +12,7 @@
           <h1 class="fw-bold mb-4">Vagas de emprego em Bauru e região</h1>
           <div class="lead">
             <p class="fs-4">
-              O Bauru Jobs divulga <span class="badge bg-primary">GRATUITAMENTE</span> vagas de emprego em Bauru e região.
+              O Bauru Oportunidades divulga <span class="badge bg-primary">GRATUITAMENTE</span> vagas de emprego em Bauru e região.
             </p>
           </div>
         </div>
@@ -33,7 +33,7 @@
 
       <h2 class="text-center mb-4">Últimas vagas publicadas</h2>
 
-      {% if (jobs|length) > 0 %}
+      {% if (oportunidades|length) > 0 %}
         <div class="table-responsive rounded-3 overflow-hidden shadow-lg">
           <table class="table table-dark table-hover align-middle mb-0">
             <thead class="table-dark">
@@ -44,7 +44,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for job in jobs %}
+              {% for job in oportunidades %}
                 <tr>
                   <td class="ps-4 fw-semibold">{{ job.name }}</td>
                   <td>

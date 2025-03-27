@@ -3,7 +3,7 @@ services:
 
   server:
     build: ./Docker/apache
-    container_name: bauru_jobs_apache_container
+    container_name: bauru_oportunidades_apache_container
     restart: "no"
     ports:
       - '80:80'
@@ -18,7 +18,7 @@ services:
 
   php:
     build: ./Docker/php/
-    container_name: bauru_jobs_php_container
+    container_name: bauru_oportunidades_php_container
     user: razielrodrigues:razielrodrigues 
     restart: "no"
     volumes:
@@ -29,7 +29,7 @@ services:
   database:
     image: mariadb:10.5.22
     hostname: docker-mariadb #needed for connection from php-pdo
-    container_name: bauru_jobs_mariadb_container
+    container_name: bauru_oportunidades_mariadb_container
     restart: "no"
     ports:
       - "3306:3306"
@@ -41,7 +41,7 @@ services:
 
   mail:
     image: mailhog/mailhog:latest
-    container_name: bauru_jobs_mail
+    container_name: bauru_oportunidades_mail
     restart: "no"
     ports:
       - 1025:1025

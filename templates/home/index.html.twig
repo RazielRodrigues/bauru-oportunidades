@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Cadastrar Vagas - Bauru Jobs
+  Cadastrar Vagas - Bauru Oportunidades
 {% endblock %}
 
 {% block body %}
   <section class="py-5 bg-dark text-light">
     <div class="container">
-      {% if (jobs|length) < 10 %}
+      {% if (oportunidades|length) < 10 %}
         <div class="row justify-content-center mb-5">
           <div class="col-lg-8">
             <div class="card bg-secondary border-0 shadow-lg">
@@ -93,10 +93,10 @@
     <div class="col-lg-10">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="fw-bold mb-0"><i class="fas fa-list me-2"></i>Suas Vagas</h3>
-            <span class="badge bg-primary">{{ jobs|length }} vaga(s)</span>
+            <span class="badge bg-primary">{{ oportunidades|length }} vaga(s)</span>
         </div>
 
-        {% if jobs|length > 0 %}
+        {% if oportunidades|length > 0 %}
         <div class="table-responsive rounded-3 shadow-lg">
             <table class="table table-dark table-hover align-middle">
                 <thead class="table-dark">
@@ -108,7 +108,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for job in jobs %}
+                    {% for job in oportunidades %}
                     <tr>
                         <td class="ps-4 fw-semibold">{{ job.name }}</td>
                         <td><span class="badge bg-primary text-white">{{ job.city }}</span></td>

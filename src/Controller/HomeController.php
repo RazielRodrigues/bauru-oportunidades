@@ -27,11 +27,17 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_index")
      */
-    public function index(UserRecordRepository $userRecordRepository): Response
+    public function index(Request $request, UserRecordRepository $userRecordRepository): Response
     {
-        $jobs = $userRecordRepository->findBy([
+        $where = [
             'status' => 2,
-        ]);
+        ];
+
+        if ($request->query->get('query')) {
+            $where['name'] = $request->query->get('query');
+        }
+
+        $jobs = $userRecordRepository->findBy($where);
         return $this->render('home/home.html.twig', ['jobs' => $jobs]);
     }
 

@@ -28,6 +28,11 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'required' => true,
                 'label' => 'E-mail',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'É necessario o email.',
+                    ]),
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

@@ -67,6 +67,8 @@
 							<th scope="col">Nome</th>
 							{# <th scope="col">Tipo</th> #}
 							<th scope="col">Cidade</th>
+														<th scope="col">Status</th>
+
 							{# <th scope="col">Criado em</th> #}
 							<th scope="col">Ações</th>
 						</tr>
@@ -77,6 +79,8 @@
 								<td>{{job.name}}</td>
 								{# <td>{{job.jobtype}}</td> #}
 								<td>{{job.city}}</td>
+								{# <td>{{job.createdat|date('d-m-Y')}}</td> #}
+								<td>{{(job.status == 1) ? 'Revisão' : 'Publicado'}}</td>
 								{# <td>{{job.createdat|date('d-m-Y')}}</td> #}
 								<td>
 									{# <a href="{{path('job_edit', {'id': job.id})}}" class="btn btn-primary">Editar</a> #}

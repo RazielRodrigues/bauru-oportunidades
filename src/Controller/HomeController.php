@@ -29,7 +29,9 @@ class HomeController extends AbstractController
      */
     public function index(UserRecordRepository $userRecordRepository): Response
     {
-        $jobs = $userRecordRepository->findAll();
+        $jobs = $userRecordRepository->findBy([
+            'status' => 2,
+        ]);
         return $this->render('home/home.html.twig', ['jobs' => $jobs]);
     }
 
@@ -54,6 +56,7 @@ class HomeController extends AbstractController
         $userRecord->setName($requestBody['job-name']);
         $userRecord->setRecord($requestBody['job-description']);
         $userRecord->setJobType($requestBody['job-type']);
+        $userRecord->setStatus(1);
         $userRecord->setCity($requestBody['job-city']);
         $userRecord->setCreatedAt(new \DateTime('now'));
 

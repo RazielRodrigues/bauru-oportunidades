@@ -3,7 +3,7 @@ services:
 
   server:
     build: ./Docker/apache
-    container_name: portugal_docs_apache_container
+    container_name: bauru_jobs_apache_container
     restart: "no"
     ports:
       - '80:80'
@@ -18,7 +18,7 @@ services:
 
   php:
     build: ./Docker/php/
-    container_name: portugal_docs_php_container
+    container_name: bauru_jobs_php_container
     user: razielrodrigues:razielrodrigues 
     restart: "no"
     volumes:
@@ -28,7 +28,7 @@ services:
 
   node:
     build: ./Docker/node/
-    container_name: portugal_docs_node_container
+    container_name: bauru_jobs_node_container
     restart: "no"
     volumes:
       - ./:/var/www/html/project
@@ -36,7 +36,7 @@ services:
   database:
     image: mariadb:10.5.22
     hostname: docker-mariadb #needed for connection from php-pdo
-    container_name: portugal_docs_mariadb_container
+    container_name: bauru_jobs_mariadb_container
     restart: "no"
     ports:
       - "3306:3306"
@@ -48,7 +48,8 @@ services:
 
   mail:
     image: mailhog/mailhog:latest
-    restart: always
+    container_name: bauru_jobs_mail
+    restart: "no"
     ports:
       - 1025:1025
       - 8025:8025

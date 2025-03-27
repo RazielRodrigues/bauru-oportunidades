@@ -18,6 +18,19 @@ class UserRecordFixtures extends Fixture
         $user->setCreatedAt(new \DateTime());
         $user->setFkUser($userX);
         $user->setJobType('Estagio');
+        $user->setStatus(1);
+        $user->setName('Emprego');
+        $user->setRecord('Lorem ipsum dolor sit amet, consectetur adipiscing...');
+
+        $manager->persist($user);
+        $manager->flush();
+
+        $user = new UserRecord();
+        $user->setCity('Bauru');
+        $user->setCreatedAt(new \DateTime());
+        $user->setFkUser($userX);
+        $user->setJobType('Estagio');
+        $user->setStatus(2);
         $user->setName('Emprego');
         $user->setRecord('Lorem ipsum dolor sit amet, consectetur adipiscing...');
 

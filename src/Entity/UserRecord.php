@@ -44,6 +44,11 @@ class UserRecord
     private $city;
 
     /**
+     * @ORM\Column(type="integer", length=1)
+     */
+    private $status;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -109,6 +114,18 @@ class UserRecord
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

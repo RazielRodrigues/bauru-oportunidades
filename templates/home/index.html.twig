@@ -3,6 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+						{% if jobs|length < 10 %}
 
 	<section id="features" class="fdb-block mb-5">
 
@@ -53,6 +54,18 @@
 				</form>
 			</div>
 		</div>
+						{% else %}
+								<div class="m-5"></div>
+
+								<div class="container">
+			<div class="row align-items-center">
+				<div class="col-12 col-md-12 ml-md-auto mt-10 text-center">
+							<h3>Só é possivel ter até 10 vagas em revisão, estamos trabalhando para automatizar o processo...</h3>
+
+			</div>
+		</div>
+
+						{% endif %}
 
 		<div class="m-5"></div>
 

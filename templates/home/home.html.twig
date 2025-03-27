@@ -33,7 +33,7 @@
 
       <h2 class="text-center mb-4">Últimas vagas publicadas</h2>
 
-      {% if (oportunidades|length) > 0 %}
+      {% if (jobs|length) > 0 %}
         <div class="table-responsive rounded-3 overflow-hidden shadow-lg">
           <table class="table table-dark table-hover align-middle mb-0">
             <thead class="table-dark">
@@ -44,7 +44,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for job in oportunidades %}
+              {% for job in jobs %}
                 <tr>
                   <td class="ps-4 fw-semibold">{{ job.name }}</td>
                   <td>

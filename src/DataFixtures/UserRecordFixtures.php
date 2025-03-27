@@ -11,7 +11,7 @@ class UserRecordFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $userX = $manager->find(User::class, 1);
+/*         $userX = $manager->find(User::class, 1);
 
         $user = new UserRecord();
         $user->setCity('Bauru');
@@ -35,6 +35,6 @@ class UserRecordFixtures extends Fixture
         $user->setRecord('Lorem ipsum dolor sit amet, consectetur adipiscing...');
 
         $manager->persist($user);
-        $manager->flush();
+        $manager->flush(); */
     }
 }

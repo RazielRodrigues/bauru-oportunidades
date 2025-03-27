@@ -25,13 +25,6 @@ services:
       -  ./:/var/www/html/project
       - ./Docker/php/config/custom.ini:/usr/local/etc/php/conf.d/custom.ini
       - ./Docker/php/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
-
-  node:
-    build: ./Docker/node/
-    container_name: bauru_jobs_node_container
-    restart: "no"
-    volumes:
-      - ./:/var/www/html/project
     
   database:
     image: mariadb:10.5.22
@@ -53,30 +46,6 @@ services:
     ports:
       - 1025:1025
       - 8025:8025
-
-  # mercure:
-  #   image: dunglas/mercure
-  #   restart: unless-stopped
-  #   environment:
-  #     # Uncomment the following line to disable HTTPS,
-  #     SERVER_NAME: ':80'
-  #     MERCURE_PUBLISHER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
-  #     MERCURE_SUBSCRIBER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
-  #     # Set the URL of your Symfony project (without trailing slash!) as value of the cors_origins directive
-  #     MERCURE_EXTRA_DIRECTIVES: |
-  #       cors_origins http://127.0.0.1:8000
-  #   # Comment the following line to disable the development mode
-  #   command: /usr/bin/caddy run --config /etc/caddy/dev.Caddyfile
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "https://localhost/healthz"]
-  #     timeout: 5s
-  #     retries: 5
-  #     start_period: 60s
-  #   ports:
-  #     - "80"
-  #   volumes:
-  #     - mercure_data:/data
-  #     - mercure_config:/config
 
 volumes:
   database_data:

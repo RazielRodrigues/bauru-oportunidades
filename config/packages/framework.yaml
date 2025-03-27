@@ -1,5 +1,10 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
+    rate_limiter:
+        login:
+            policy: 'fixed_window'
+            limit: 5
+            interval: '5 minutes'
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
     http_method_override: false

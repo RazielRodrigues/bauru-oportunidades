@@ -82,14 +82,14 @@ class RegistrationController extends AbstractController
         $userId = $request->query->get('id');
 
         if (!$userId) {
-            $this->addFlash('error', 'Invalid verification link');
+            $this->addFlash('error', 'Link invalido');
             return $this->redirectToRoute('app_register');
         }
 
         $user = $entityManager->getRepository(User::class)->find($userId);
 
         if (!$user) {
-            $this->addFlash('error', 'User not found');
+            $this->addFlash('error', 'Usuario não encontrado');
             return $this->redirectToRoute('app_register');
         }
 
@@ -106,7 +106,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Your email has been verified! You can now log in.');
+            $this->addFlash('success', 'Email verificado!');
         } catch (VerifyEmailExceptionInterface $e) {
             $this->addFlash('error', $e->getReason());
             return $this->redirectToRoute('app_register');

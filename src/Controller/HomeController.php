@@ -49,72 +49,117 @@ class HomeController extends AbstractController
         return $this->render('home/about.html.twig');
     }
 
-    /**
-     * @Route("/create-record", name="app_create_record")
-     */
-    public function create(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+  
+/**
+ * @Route("/create-record", name="app_create_record", methods={"POST"})
+ */
+public function create(Request $request): Response
+{
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $requestBody = $request->request->all();
+    $requestBody = $request->request->all();
 
-        $userRecord = new UserRecord();
+    // Validação básica dos campos
+    if (empty($requestBody['job-name'])) {
+        $this->addFlash('error', 'O nome da vaga é obrigatório');
+        return $this->redirectToRoute('app_home');
+    }
+
+    $userRecord = new UserRecord();
+    $userRecord->setName($requestBody['job-name']);
+    $userRecord->setRecord($requestBody['job-description']);
+    $userRecord->setJobType($requestBody['job-type']);
+    $userRecord->setStatus(1); // Status 1 = Em revisão
+    $userRecord->setCity($requestBody['job-city']);
+    $userRecord->setCreatedAt(new \DateTime('now'));
+
+    /** @var \App\Entity\User $user */
+    $user = $this->getUser();
+    $user->addUserRecord($userRecord);
+
+    try {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($userRecord);
+        $entityManager->flush();
+        
+        $this->addFlash('success', 'Vaga cadastrada com sucesso e está em revisão!');
+    } catch (\Exception $e) {
+        $this->addFlash('error', 'Ocorreu um erro ao cadastrar a vaga: '.$e->getMessage());
+    }
+
+    return $this->redirectToRoute('app_home');
+}
+
+/**
+ * @Route("/home", name="app_home")
+ */
+public function read(): Response
+{
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+    /** @var \App\Entity\User $user */
+    $user = $this->getUser();
+    return $this->render('home/index.html.twig', [
+        'jobs' => $user->getUserRecords()->getValues(),
+    ]);
+}
+
+/**
+ * @Route("/update-record/{id}", name="app_update_record", methods={"POST"})
+ */
+public function update(Request $request, UserRecord $userRecord): Response
+{
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    
+    // Verifica se o registro pertence ao usuário logado
+    if ($userRecord->getFkUser() !== $this->getUser()) {
+        $this->addFlash('error', 'Você não tem permissão para editar esta vaga');
+        return $this->redirectToRoute('app_home');
+    }
+
+    $requestBody = $request->request->all();
+    
+    try {
         $userRecord->setName($requestBody['job-name']);
         $userRecord->setRecord($requestBody['job-description']);
         $userRecord->setJobType($requestBody['job-type']);
-        $userRecord->setStatus(1);
         $userRecord->setCity($requestBody['job-city']);
-        $userRecord->setCreatedAt(new \DateTime('now'));
-
-        /** @var \App\Entity\User $user */
-        $user = $this->getUser();
-        $status = $user->addUserRecord($userRecord);
-
-        $this->getDoctrine()->getManager()->persist($userRecord);
+        
         $this->getDoctrine()->getManager()->flush();
-
-        return $this->json(['message' => 'save success'], 200);
+        $this->addFlash('success', 'Vaga atualizada com sucesso!');
+    } catch (\Exception $e) {
+        $this->addFlash('error', 'Erro ao atualizar a vaga: '.$e->getMessage());
     }
 
-    /**
-     * @Route("/home", name="app_home")
-     */
-    public function read(): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    return $this->redirectToRoute('app_home');
+}
 
-        /** @var \App\Entity\User $user */
-        $user = $this->getUser();
-        return $this->render('home/index.html.twig', [
-            'jobs' => $user->getUserRecords()->getValues(),
-        ]);
+/**
+ * @Route("/delete-record/{id}", name="app_delete_record", methods={"DELETE"})
+ */
+public function delete(Request $request, UserRecord $userRecord): Response
+{
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    
+    // Verifica se o registro pertence ao usuário logado
+    if ($userRecord->getFkUser() !== $this->getUser()) {
+        $this->addFlash('error', 'Você não tem permissão para excluir esta vaga');
+        return $this->redirectToRoute('app_home');
     }
 
-    /**
-     * @Route("/update-record", name="app_update_record")
-     */
-    public function update(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        return $this->json([
-            $request,
-            'message' => 'update success'
-        ], 200);
+    try {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($userRecord);
+        $entityManager->flush();
+        
+        $this->addFlash('success', 'Vaga excluída com sucesso!');
+    } catch (\Exception $e) {
+        $this->addFlash('error', 'Erro ao excluir a vaga: '.$e->getMessage());
     }
 
-    /**
-     * @Route("/delete-record", name="app_delete_record")
-     */
-    public function delete(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    return $this->redirectToRoute('app_home');
+}
 
-        return $this->json([
-            $request,
-            'message' => 'delete success'
-        ], 200);
-    }
 
     /**
      * @Route("/scrapper", name="app_scrapper")

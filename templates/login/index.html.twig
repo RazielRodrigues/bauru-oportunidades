@@ -1,47 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}
+  Login - Bauru Jobs
+{% endblock %}
 
 {% block body %}
+  <section class="py-5 bg-dark text-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          <!-- Card de Login -->
+          <div class="card bg-secondary border-0 shadow-lg">
+            <div class="card-header bg-primary text-white text-center py-3">
+              <h3 class="mb-0 fw-bold"><i class="fas fa-sign-in-alt me-2"></i>Área de Acesso</h3>
+              <small class="d-block mt-1">Para cadastrar vagas é necessário login</small>
+            </div>
 
-	<section class="fdb-block">
-		<div class="container">
-        
-            {% if error %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+            <div class="card-body p-4">
+              {% if error %}
+                <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert">
+                  <div>
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                  </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            {% endif %}
+              {% endif %}
 
-            <h3 class="text-center">Para cadastrar uma vaga é necessário fazer login</h3>
+              <form action="{{ path('app_login') }}" method="post">
+                <!-- Email -->
+                <div class="mb-4">
+                  <label for="username" class="form-label fw-bold"><i class="fas fa-envelope me-2"></i>E-mail</label>
+                  <input type="email" class="form-control bg-dark text-light border-dark" id="username" name="_username" value="{{ last_username }}" placeholder="seu@email.com" required />
+                </div>
 
-        	<div class="row justify-content-center">
-                <form action="{{ path('app_login') }}" method="post">
+                <!-- Senha -->
+                <div class="mb-4">
+                  <label for="password" class="form-label fw-bold"><i class="fas fa-lock me-2"></i>Senha</label>
+                  <input type="password" class="form-control bg-dark text-light border-dark" id="password" name="_password" placeholder="Digite sua senha" required />
+                </div>
 
-                    <div class="form-group">
-                        <label for="username">Email</label>
-                        <input name="_username" value="{{ last_username }}" type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password">Senha</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password" name="_password">
-                    </div>
+                <!-- Campos ocultos -->
+                <input type="hidden" name="_target_path" value="/home" />
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
 
-                    <input type="hidden" name="_target_path" value="/home"/> 
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <!-- Botão de Login -->
+                <button type="submit" class="btn btn-primary w-100 py-2 mb-3"><i class="fas fa-sign-in-alt me-2"></i>Entrar</button>
 
-                    <button type="submit" class="btn btn-outline-primary col-12">Login</button>
-                    <a class="btn btn-outline-primary col-12 mt-2" href="{{path('app_register')}}">
-					    Criar uma conta
-				    </a>
-                </form>
-			</div>
-
-		</div>
-	</section>
-
+                <!-- Link para Cadastro -->
+                <div class="text-center mt-3">
+                  <p class="mb-2">Não tem uma conta?</p>
+                  <a href="{{ path('app_register') }}" class="btn btn-outline-light w-100"><i class="fas fa-user-plus me-2"></i>Criar Conta</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

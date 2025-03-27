@@ -1,27 +1,162 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Registrar{% endblock %}
+{% block title %}Registro - Bauru Jobs{% endblock %}
 
 {% block body %}
+<section class="py-5 bg-dark text-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <!-- Card de Registro -->
+                <div class="card bg-secondary border-0 shadow-lg">
+                    <div class="card-header bg-primary text-white text-center py-3">
+                        <h3 class="mb-0 fw-bold">
+                            <i class="fas fa-user-plus me-2"></i>Criar Nova Conta
+                        </h3>
+                        <small class="d-block mt-1">Preencha os dados para se cadastrar</small>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                            
+                            <!-- Email -->
+                            <div class="mb-4">
+                                {{ form_label(registrationForm.email, 'E-mail', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                                <div class="input-group">
+                                    <span class="input-group-text bg-dark border-dark text-light">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    {{ form_widget(registrationForm.email, {
+                                        'attr': {
+                                            'class': 'form-control bg-dark text-light border-dark',
+                                            'placeholder': 'seu@email.com'
+                                        }
+                                    }) }}
+                                </div>
+                                {{ form_errors(registrationForm.email) }}
+                            </div>
+                            
+                            <!-- Senha -->
+                            <div class="mb-4">
+                                {{ form_label(registrationForm.plainPassword, 'Senha', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                                <div class="input-group">
+                                    <span class="input-group-text bg-dark border-dark text-light">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    {{ form_widget(registrationForm.plainPassword, {
+                                        'attr': {
+                                            'class': 'form-control bg-dark text-light border-dark password-field',
+                                            'placeholder': 'Digite uma senha segura',
+                                            'id': 'password'
+                                        }
+                                    }) }}
+                                    <button class="btn btn-outline-light toggle-password" type="button">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <small class="form-text text-muted">Mínimo de 6 caracteres</small>
+                                {{ form_errors(registrationForm.plainPassword) }}
+                            </div>
+                            
+                            <!-- Confirmar Senha -->
+                            <div class="mb-4">
+                                <label for="confirm_password" class="form-label fw-bold">Confirmar Senha</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-dark border-dark text-light">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" 
+                                           class="form-control bg-dark text-light border-dark password-field" 
+                                           id="confirm_password" 
+                                           placeholder="Digite a senha novamente"
+                                           required>
+                                    <button class="btn btn-outline-light toggle-password" type="button">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div id="password-match" class="form-text"></div>
+                            </div>
+                            
+                            <!-- Termos -->
+                            <div class="mb-4 form-check">
+                                {{ form_widget(registrationForm.agreeTerms, {
+                                    'attr': {
+                                        'class': 'form-check-input'
+                                    }
+                                }) }}
+                                {{ form_label(registrationForm.agreeTerms, 'Aceito os termos de serviço', {
+                                    'label_attr': {
+                                        'class': 'form-check-label'
+                                    }
+                                }) }}
+                                {{ form_errors(registrationForm.agreeTerms) }}
+                            </div>
+                            
+                            <!-- Botão de Registro -->
+                            <button type="submit" class="btn btn-primary w-100 py-2 mb-3" id="register-button">
+                                <i class="fas fa-user-plus me-2"></i>Cadastrar
+                            </button>
+                            
+                            <!-- Link para Login -->
+                            <div class="text-center mt-3">
+                                <p class="mb-2">Já possui uma conta?</p>
+                                <a href="{{ path('app_login') }}" class="btn btn-outline-light w-100">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Fazer Login
+                                </a>
+                            </div>
+                            
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-	<section class="fdb-block">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mostrar/ocultar senha
+    const toggleButtons = document.querySelectorAll('.toggle-password');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.parentNode.querySelector('.password-field');
+            const icon = this.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+    });
 
-		<div class="container">
+    // Validar confirmação de senha
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm_password');
+    const passwordMatch = document.getElementById('password-match');
+    const registerButton = document.getElementById('register-button');
 
-        	<div class="row justify-content-center">
+    function validatePassword() {
+        if (password.value !== confirmPassword.value) {
+            passwordMatch.innerHTML = '<span class="text-danger"><i class="fas fa-times-circle"></i> As senhas não coincidem</span>';
+            registerButton.disabled = true;
+            registerButton.classList.add('disabled');
+        } else if (password.value.length > 0 && password.value.length < 6) {
+            passwordMatch.innerHTML = '<span class="text-danger"><i class="fas fa-times-circle"></i> A senha deve ter pelo menos 6 caracteres</span>';
+            registerButton.disabled = true;
+            registerButton.classList.add('disabled');
+        } else if (password.value === confirmPassword.value && password.value.length >= 6) {
+            passwordMatch.innerHTML = '<span class="text-success"><i class="fas fa-check-circle"></i> As senhas coincidem</span>';
+            registerButton.disabled = false;
+            registerButton.classList.remove('disabled');
+        } else {
+            passwordMatch.innerHTML = '';
+        }
+    }
 
-                {{ form_start(registrationForm) }}
-                    {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.plainPassword, {
-                        label: 'Senha'
-                    }) }}
-                    <button type="submit" class="btn btn-outline-primary form-control">Registrar</button>
-                    {{ form_row(registrationForm.agreeTerms) }}
-                {{ form_end(registrationForm) }}
-
-			</div>
-
-		</div>
-	</section>
-
+    password.addEventListener('input', validatePassword);
+    confirmPassword.addEventListener('input', validatePassword);
+});
+</script>
 {% endblock %}

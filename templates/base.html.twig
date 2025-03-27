@@ -1,84 +1,123 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Encontre vagas de emprego em Bauru e região no Bauru Jobs. Divulgação econsulta de oportunidades gratuitas.">
-    <meta name="keywords" content="bauru jobs, vagas de emprego bauru, empregos bauru, trabalho bauru, oportunidades bauru, vaga emprego">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Bauru Jobs">
-    <meta name="google-adsense-account" content="ca-pub-7321875619253591">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/froala-design-blocks/2.0.0/css/froala_blocks.min.css">
-    <link rel="stylesheet" href="{{ absolute_url(asset('assets/css/style.css')) }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ absolute_url(asset('assets/images/fav/android-icon-192x192.png')) }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ absolute_url(asset('assets/images/fav/favicon-32x32.png')) }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ absolute_url(asset('assets/images/fav/favicon-96x96.png')) }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ absolute_url(asset('assets/images/fav/favicon-16x16.png')) }}">
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Encontre vagas de emprego em Bauru e região no Bauru Jobs. Divulgação e consulta de oportunidades gratuitas." />
+    <meta name="keywords" content="bauru jobs, vagas de emprego bauru, empregos bauru, trabalho bauru, oportunidades bauru, vaga emprego" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Bauru Jobs" />
+    <meta name="google-adsense-account" content="ca-pub-7321875619253591" />
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ absolute_url(asset('assets/images/fav/android-icon-192x192.png')) }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ absolute_url(asset('assets/images/fav/favicon-32x32.png')) }}" />
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ absolute_url(asset('assets/images/fav/favicon-96x96.png')) }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ absolute_url(asset('assets/images/fav/favicon-16x16.png')) }}" />
+
     <script defer>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-8PWYYN6JVY');
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'G-8PWYYN6JVY')
     </script>
-    <title>Bauru Jobs - Vagas de Emprego em Bauru e Região{% block title %}{% endblock %}</title>
 
-    {% block stylesheets %}{% endblock %}
-    {% block javascripts %}{% endblock %}
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="{{ path('app_index') }}">
-                    <img width="30" height="30" src="{{ absolute_url(asset('assets/images/logo.jpg')) }}" alt="Logo Bauru Jobs" class="d-inline-block align-top">
-                    <span class="text-dark">Bauru Jobs</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_index') }}">Vagas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_home') }}">Cadastrar Vaga</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_about') }}">Sobre</a>
-                        </li>
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            <li class="nav-item">
-                                <a href="{{ path('app_logout') }}" class="nav-link">Logout</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link disabled">{{ app.user.username }}</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <title>
+      Bauru Jobs - Vagas de Emprego em Bauru e Região{% block title %}
+
+      {% endblock %}
+    </title>
+
+    {% block stylesheets %}
+
+    {% endblock %}
+  </head>
+  <body class="d-flex flex-column min-vh-100 bg-dark text-light">
+    <!-- Navbar -->
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand fw-bold" href="{{ path('app_index') }}">Bauru Jobs</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_index') }}"><i class="fas fa-briefcase me-1"></i> Vagas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_home') }}"><i class="fas fa-plus-circle me-1"></i> Cadastrar Vaga</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_about') }}"><i class="fas fa-info-circle me-1"></i> Sobre</a>
+              </li>
+              {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-user-circle me-1"></i> {{ app.user.username }}</a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+{#                     <li>
+                      <a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Configurações</a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li> #}
+                    <li>
+                      <a class="dropdown-item text-danger" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt me-2"></i> Sair</a>
+                    </li>
+                  </ul>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
 
-    <main role="main">
-        {% block body %}{% endblock %}
+    <!-- Main Content -->
+    <main class="flex-grow-1 py-4">
+      <div class="container">
+        {% block body %}
+
+        {% endblock %}
+      </div>
     </main>
 
-    <footer class="bg-light text-center py-3 mt-4">
-        <div class="container">
-            <p class="h5">Bauru Jobs - &copy; {{ "now"|date("Y") }} Todos os direitos reservados</p>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <h5 class="fw-bold mb-3">Bauru Jobs</h5>
+            <p class="mb-0">Conectando talentos a oportunidades em Bauru e região.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            {#             <div class="h4 mb-3">
+              <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+            </div> #}
+            <p class="mb-0">&copy; {{ 'now'|date('Y') }} Bauru Jobs. Todos os direitos reservados.</p>
+          </div>
         </div>
+      </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="{{ absolute_url(asset('assets/js/main.js')) }}"></script>
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PWYYN6JVY"></script>
 
-</body>
+    {% block javascripts %}
+
+    {% endblock %}
+  </body>
 </html>

@@ -11,13 +11,13 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        $user = new User();
+/*         $user = new User();
         $user->setEmail('user@example.com');
         $user->setRoles(['admin']);
         $user->setPassword('12345678');
 
         $manager->persist($user);
         $manager->flush();
-
+ */
     }
 }

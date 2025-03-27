@@ -48,9 +48,9 @@ class HomeController extends AbstractController
      */
     public function create(Request $request): Response
     {
-        $requestBody = $request->request->all();
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        if (empty($requestBody)) return $this->json(['message' => 'Please all information'], 500);
+        $requestBody = $request->request->all();
 
         $userRecord = new UserRecord();
         $userRecord->setName($requestBody['job-name']);
@@ -89,6 +89,8 @@ class HomeController extends AbstractController
      */
     public function update(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->json([
             $request,
             'message' => 'update success'
@@ -100,6 +102,8 @@ class HomeController extends AbstractController
      */
     public function delete(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->json([
             $request,
             'message' => 'delete success'
@@ -111,6 +115,7 @@ class HomeController extends AbstractController
      */
     public function scrapper(): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $response = $this->client->request(
             'GET',

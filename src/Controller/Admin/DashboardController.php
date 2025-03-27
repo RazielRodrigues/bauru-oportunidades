@@ -47,7 +47,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             // the name visible to end users
-            ->setTitle('Bauru Oportunidades')
+            ->setTitle('Bauru Jobs')
             // you can include HTML contents too (e.g. to link to an image)
             // ->setTitle('<img src="..."> ACME <span class="text-small">Corp.</span>')
 

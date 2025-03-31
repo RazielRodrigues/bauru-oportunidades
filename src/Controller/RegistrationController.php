@@ -53,9 +53,9 @@ class RegistrationController extends AbstractController
             );
 
             $email = (new Email())
-                ->from('contato@baurujobs.com.br')
+                ->from('contato@bauruoportunidades.com.br')
                 ->to($user->getEmail())
-                ->subject('Verifique seu Email - Bem-vindo ao BauruJobs!')
+                ->subject('Verifique seu Email - Bem-vindo ao Bauru Oportunidades!')
                 ->html($this->renderView('registration/email.html.twig', [
                     'signedUrl' => $signatureComponents->getSignedUrl(),
                 ]));

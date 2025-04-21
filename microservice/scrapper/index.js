@@ -9,13 +9,14 @@ app.use(cors());
 
 app.get("/", async (req, res) => {
 
-    let url = 'https://www.bauruempregos.com.br/home/vagas';
-    let htmlClass = '.vaga';
+    let url = 'https://vagasbauru.com.br/vagas/';
+    let htmlClass = '.status-publish';
     let scrapper = new Scrapper(url, htmlClass);
     let data = await scrapper.scrap();
-
+    res.send(data);
+/* 
     let dadosDetalhes = [];
-    htmlClass = '.descricao-vaga';
+    htmlClass = '.elementor-widget-container';
 
     let ids = [];
     data.map(element => ids.push(element.replace(/([^\d])+/gim, '')));
@@ -31,7 +32,7 @@ app.get("/", async (req, res) => {
         detalhes.push(values);
      });
 
-    res.send(detalhes);
+    res.send(detalhes); */
 
 });
 

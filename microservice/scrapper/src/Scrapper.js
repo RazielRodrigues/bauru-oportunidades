@@ -18,7 +18,11 @@ class Scrapper {
 
             $(`${this.htmlClass}`, html).each(function () {
                 // const title = $(this).text();
+                console.log(html)
+
                 const url = $(this).find('a').attr('href');
+                console.log(url)
+
                 articles.push(url);
 
             });
